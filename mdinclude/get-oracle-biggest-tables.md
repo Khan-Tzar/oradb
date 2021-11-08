@@ -13,17 +13,9 @@ COLUMN segment_name  FORMAT A35
 
 select
    *
-from (
-   select
-      owner,
-      segment_name,
-      bytes/1024/1024 size_mb
-   from
-      dba_segments
-   where
-      segment_type = 'TABLE'
-   order by
-      bytes/1024/1024 desc)
-where
-   rownum <= 10;
+  from ( select owner,segment_name, bytes/1024/1024 size_mb
+           from dba_segments
+          where segment_type = 'TABLE'
+          order by bytes/1024/1024 desc)
+ where rownum <= 10; 
 ```
